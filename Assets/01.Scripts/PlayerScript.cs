@@ -59,5 +59,10 @@ public class PlayerScript : MonoBehaviour
         //Jump();
         CreateBox();
     }
+
+    void OnColliderEnter2D(Collision2D other)
+    {
+        
+    }
     
 }
