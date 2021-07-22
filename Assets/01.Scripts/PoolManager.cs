@@ -1,0 +1,48 @@
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+public class PoolManager : MonoBehaviour
+{
+    public static PoolManager instance;
+
+    public GameObject poolingObject;
+
+    Queue<BOX> poolingObjectQueue = new Queue<BOX>();
+    void Awake()
+    {
+        instance = this;
+        Init(10); //초기 생성 수
+    }
+
+    private void Init(int count){
+        for(int i = 0; i < count; i++){
+            poolingObjectQueue.Enqueue(CreateNewObject());  
+        }
+    }
+    private BOX CreateNewObject(){
+        var newObj = Instantiate(poolingObject).GetComponent<BOX>();
+        newObj.gameObject.SetActive(false);
+        newObj.gameObject.transform.SetParent(transform);
+        return newObj;
+    }
+    public BOX GetObject(){ // 오브젝트 생성 시 함수 사용 및 위치 지정
+        if(instance.poolingObjectQueue.Count > 0){
+            var obj = instance.poolingObjectQueue.Dequeue();
+            obj.gameObject.transform.SetParent(null);
+            obj.gameObject.SetActive(true);
+            return obj;
+        }
+        else{
+            var newObj = instance.CreateNewObject();
+            newObj.gameObject.transform.SetParent(null);
+            newObj.gameObject.SetActive(true);
+            return newObj;
+        }
+    }
+    public void ReturnObject(BOX obj){ // 오브젝트를 다시 받아올 때 사용
+        obj.gameObject.SetActive(false);
+        obj.gameObject.transform.SetParent(transform);
+        instance.poolingObjectQueue.Enqueue(obj);
+    }
+}
