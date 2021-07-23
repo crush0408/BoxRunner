@@ -16,11 +16,12 @@ public class BackGroundScrolling : MonoBehaviour
         yScreenHalfSize = Camera.main.orthographicSize;
         xScreenHalfSize = yScreenHalfSize * Camera.main.aspect;
  
-        leftPosX = -(xScreenHalfSize * 2);
-        rightPosX = xScreenHalfSize * 2 * backgrounds.Length;
+        leftPosX = -(xScreenHalfSize * 4);
+        rightPosX = xScreenHalfSize * 4 * backgrounds.Length;
     }
     void Update()
     {
+    
        for(int i = 0; i < backgrounds.Length; i++)
         {
             backgrounds[i].position += new Vector3(-speed, 0, 0) * Time.deltaTime;

@@ -5,7 +5,6 @@ using UnityEngine.UI;
 
 public class StageManager : MonoBehaviour
 {
-    public int apple;
     public Text appleText;
     PlayerScript player;
     public GameObject finish;
@@ -26,9 +25,10 @@ public class StageManager : MonoBehaviour
         finish = GameObject.Find("FINISH");
         _totalAppleCount = apples.Length;
         Debug.Log(_totalAppleCount);
-        apple = 0;
-        appleText.text = $"apple : {apple}";
-
+        _appleCount = 0;
+        _achievement = 0;
+        appleText.text = $"{_appleCount} / {_totalAppleCount}";
+        Debug.Log($"{_appleCount} / {_totalAppleCount}");
         startX = player.transform.position.x;
         finishX = finish.transform.position.x;
         totalDistance = finishX - startX;
@@ -49,17 +49,20 @@ public class StageManager : MonoBehaviour
     }
     public void Achievement(){
         float curDis = (player.transform.position.x - startX) + (finishX - finish.transform.position.x);
+        if(curDis > totalDistance){
+            curDis = totalDistance;
+        }
         _achievement = (curDis / totalDistance);
         
         //Debug.Log(_achievement);
         //Debug.Log((int)(_achievement * 100) + "%");
     }
     public void AppleUpdate(){
-        apple++;
-        appleText.text = $"apple : {apple}";
-        _appleCount = apple;
+        _appleCount++;
+        appleText.text = $"{_appleCount} / {_totalAppleCount}";
     }
     public void GameResult(bool _isClear){
+        
         DataManager.instance.isClear = _isClear;
         DataManager.instance.appleCount = _appleCount;
         DataManager.instance.totalAppleCount = _totalAppleCount;

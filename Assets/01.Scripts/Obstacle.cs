@@ -27,8 +27,8 @@ public class Obstacle : MonoBehaviour
             //Animation animation;
             //if(!(animation.IsPlaying("DEAD")))
             player.animator.SetTrigger("Die");
-            //stageManager.GameResult(false);
-            //SceneManager.LoadScene("ClearOver");
+            stageManager.GameResult(false);
+            SceneManager.LoadScene("ClearOver");
         }
         /*
         if(box == null)
@@ -37,6 +37,7 @@ public class Obstacle : MonoBehaviour
             return;
         }
         */
+        /*
         if (col.gameObject.CompareTag("BOX"))
         {
             Debug.Log("hi");
@@ -46,6 +47,7 @@ public class Obstacle : MonoBehaviour
             
             PoolManager.instance.ReturnObject(col.gameObject.GetComponent<BOX>());
         }
+        */
     }
     
 }

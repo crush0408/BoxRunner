@@ -6,16 +6,24 @@ using UnityEngine.UI;
 
 public class ClearOverPanel : MonoBehaviour
 {
-    public StageSelect stageSelect;
-    
+    public int _index;
+    public float _achievement;
+    public int _appleCount;
+    public int _totalAppleCount;
+    public bool _isClear;
     void Start()
     {
-
+        InitData();
+    }
+    private void InitData(){
+        _index = DataManager.instance.cur_index;
+        _achievement = DataManager.instance.achievement;
+        _appleCount = DataManager.instance.appleCount;
+        _totalAppleCount = DataManager.instance.totalAppleCount;
+        _isClear = DataManager.instance.isClear;
     }
     void Awake()
     {
-        stageSelect = FindObjectOfType<StageSelect>();
-        Debug.Log(stageSelect.index);
     }
 
     // Update is called once per frame
@@ -25,48 +33,15 @@ public class ClearOverPanel : MonoBehaviour
     }
     public void SelectStage()
     {
-
         SceneManager.LoadScene("LevelSelect");
         //SceneManager.LoadScene(UnityEngine.SceneManagement.SceneManager.GetActiveScene().buildIndex + 1);
     }
     public void nextStage()
     {
-        for (int i = 0; i < stageSelect.Stages.Length; i++)
-        {
-            switch (i)
-            {
-                case 0:
-                    SceneManager.LoadScene(2);
-                    break;
-                case 1:
-                    SceneManager.LoadScene(3);
-                    break;
-                case 2:
-                    SceneManager.LoadScene(4);
-                    break;
-            }
-        }
+        SceneManager.LoadScene(_index + 1);
     }
     public void RetryStage()
     {
-        SceneManager.LoadScene(stageSelect.index + 1);
-        
-
-        if(stageSelect.index == 0)
-        {
-            SceneManager.LoadScene(1);
-        }
-        if(stageSelect.index == 1)
-        {
-            SceneManager.LoadScene(2);
-        }
-        if(stageSelect.index == 2)
-        {
-            SceneManager.LoadScene(3);
-        }
-        if(stageSelect.index == 3)
-        {
-            SceneManager.LoadScene(4);
-        }
+        SceneManager.LoadScene(_index);
     }
 }

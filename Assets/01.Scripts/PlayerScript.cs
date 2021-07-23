@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class PlayerScript : MonoBehaviour
 {
@@ -8,7 +9,7 @@ public class PlayerScript : MonoBehaviour
     public AudioClip BoxCreat;
     public GameObject map;
     Rigidbody2D rigid;
-
+    StageManager stageManager;
     float jumpPower;
     float gravityPower;
     bool isGround;
@@ -23,14 +24,15 @@ public class PlayerScript : MonoBehaviour
 
     AudioSource audioSource;
 
-
+    public int canBox;
     private void Init()
     {
         animator = GetComponent<Animator>();
+        stageManager = FindObjectOfType<StageManager>();
         rigid = GetComponent<Rigidbody2D>();
         GroundCheck();
         BoxCheck();
-        jumpPower = 5f;
+        jumpPower = 10f;
         gravityPower = 7f;
     }
 
@@ -39,23 +41,25 @@ public class PlayerScript : MonoBehaviour
         audioSource.clip = BoxCreat;
         audioSource.Play();
     }
-    /*
+    
     public void Jump(){
+        
         if(isGround){
-            
             rigid.velocity = Vector2.zero;
-            rigid.AddForce(Vector2.up * jumpPower * 50);
+            rigid.AddForce(Vector2.up * jumpPower * 100);
             isGround = false;
-            Gravity();
+            //Gravity();
+            Debug.Log("JUMP");
         }
         
     }
-    */
+    /*
     private void Gravity()
     {
         rigid.AddForce(Vector2.down * gravityPower * 20);
 
     }
+    */
     private void GroundCheck()
     {
         if (rigid.velocity.y < 0)
@@ -78,7 +82,7 @@ public class PlayerScript : MonoBehaviour
     }
     public void CreateBox()
     {
-        if (DataManager.instance.isPlaying)
+        if (DataManager.instance.isPlaying && canBox > 0)
         {
             if (!isBox)
             {
@@ -87,6 +91,7 @@ public class PlayerScript : MonoBehaviour
                 boxObj.transform.position = new Vector3(this.transform.position.x + (this.gameObject.transform.localScale.x + 0.5f), this.transform.position.y + 0.5f, this.transform.position.z);
 
                 boxObj.transform.SetParent(map.transform);
+                canBox--;
             }
             else
             {
@@ -98,6 +103,7 @@ public class PlayerScript : MonoBehaviour
                 );
 
                 boxObj.transform.SetParent(map.transform);
+                canBox--;
             }
         }
 
@@ -116,6 +122,30 @@ public class PlayerScript : MonoBehaviour
             GroundCheck();
             BoxCheck();
         }
-        //Jump();
+        /*
+        if(Input.GetKeyDown(KeyCode.S))
+            Jump();
+        */
+    }
+    private void OnCollisionEnter2D(Collision2D col){
+        if(col.gameObject.CompareTag("T")){
+            this.gameObject.GetComponent<BoxCollider2D>().isTrigger = true;
+        }
+        if(col.gameObject.CompareTag("SPIKE")){
+            DataManager.instance.isPlaying = false;
+            //플레이어 애니메이션 재생
+            stageManager.GameResult(false);
+            SceneManager.LoadScene("ClearOver");
+        }
+    }
+    private void OnTriggerEnter2D(Collider2D col){
+        if(col.gameObject.CompareTag("JUMP")){
+            Jump();
+            Debug.Log("JuMP");
+        }
+        if(col.gameObject.CompareTag("BOX_ADD")){
+            canBox++;
+            col.gameObject.SetActive(false);
+        }
     }
 }

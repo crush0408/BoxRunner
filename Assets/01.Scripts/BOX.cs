@@ -6,6 +6,7 @@ public class BOX : MonoBehaviour
 {
     public Animator animator;
     Rigidbody2D rigid;
+    
     public static bool isb = true;
     void Start()
     {
@@ -31,10 +32,15 @@ public class BOX : MonoBehaviour
     }
     private void OnCollisionEnter2D(Collision2D col)
     {
-        if(!(col.gameObject.CompareTag("GROUND") || col.gameObject.CompareTag("BOX")))
+        if(col.gameObject.CompareTag("SPIKE")){
+            //박스 애니메이션 실행
+            PoolManager.instance.ReturnObject(this);
+            Debug.Log("Return_" + this.gameObject.name);
+        }
+        else if(!(col.gameObject.CompareTag("GROUND") || col.gameObject.CompareTag("BOX")))// && !col.gameObject.CompareTag("SPIKE"))
         {
             rigid.AddForce(Vector2.down * 500);
-            
+            Debug.Log("떨어짐");   
         }
     }
     

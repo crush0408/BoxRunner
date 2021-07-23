@@ -8,6 +8,11 @@ TagManager:
   - GROUND
   - PLAYER
   - APPLE
+  - JUMP
+  - BOX_ADD
+  - T
+  - FINISH
+  - SPIKE
   layers:
   - Default
   - TransparentFX
