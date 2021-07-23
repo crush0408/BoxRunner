@@ -171,6 +171,27 @@ public class StageSelect : MonoBehaviour
         // }
     }
 
+    public void TouchStage()
+    {
+        if(index == 0)
+        {
+            SceneManager.LoadScene(2);
+        }
+        if(index == 1)
+        {
+            SceneManager.LoadScene(3);
+        }
+        if(index == 2)
+        {
+            SceneManager.LoadScene(4);
+        }
+        if(index == 3)
+        {
+            SceneManager.LoadScene(5);
+        }
+
+    }
+
     public void SelectStage() //스테이지 선택
     {
         for (int i = 0; i < 4; i++)

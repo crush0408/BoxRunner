@@ -7,17 +7,19 @@ using DG.Tweening;
 
 public class IngameMenu : MonoBehaviour
 {
+    public GameObject TextPos;
+    public Button StopButton;
     public Slider StageCurBar;
     StageManager stageManager;
     public Transform StopMenu;
 
     public Text delayText;
-    
+
     // Start is called before the first frame update
     void Start()
     {
         StopMenu.transform.localScale = Vector3.zero;
-        
+
     }
     void Awake()
     {
@@ -27,8 +29,10 @@ public class IngameMenu : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(DataManager.instance.isPlaying){
-            StageCur();  
+        
+        if (DataManager.instance.isPlaying)
+        {
+            StageCur();
         }
     }
 
@@ -40,6 +44,7 @@ public class IngameMenu : MonoBehaviour
 
     public void StopMenuOpen()
     {
+
         StopMenu.DOScale(new Vector3(1, 1, 1), 0.2f).OnComplete(delegate ()
         {
             //Time.timeScale = 0f;
@@ -49,20 +54,27 @@ public class IngameMenu : MonoBehaviour
     public void StopMenuClose()
     {
         //StopMenu.DOScale(new Vector3(0, 0, 0), 0.2f);
-        
+
         StopMenu.DOScale(new Vector3(0, 0, 0), 0.2f).OnComplete(delegate ()
         {
             StartCoroutine(Delay());
         });
-        
+
     }
-    public void Retry(){
+
+    public void LoadEnding()
+    {
+        DataManager.instance.isPlaying = true;
+        SceneManager.LoadScene("ClearOver");
+    }
+    public void Retry()
+    {
         SceneManager.LoadScene(UnityEngine.SceneManagement.SceneManager.GetActiveScene().buildIndex);
-        StartCoroutine(Delay());
         //Time.timeScale = 1f;
-        
+
     }
-    IEnumerator Delay(){
+    IEnumerator Delay()
+    {
         delayText.gameObject.SetActive(true);
         delayText.text = "3";
         yield return new WaitForSeconds(1f);

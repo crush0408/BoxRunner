@@ -11,6 +11,7 @@ public class DataManager : MonoBehaviour
     public int appleCount;
     public int totalAppleCount;
     public float achievement;
+    public float masterSoundVolume;
 
     public bool isPlaying = true;
     void Start()

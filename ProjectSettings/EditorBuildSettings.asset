@@ -18,6 +18,15 @@ EditorBuildSettings:
     path: Assets/00.Scenes/Stage_ONE.unity
     guid: 21977f5dea0b0664ab07b3590a791146
   - enabled: 1
+    path: Assets/00.Scenes/Stage_TWO.unity
+    guid: ee884973b2378564ba4536a7a331d06b
+  - enabled: 1
+    path: Assets/00.Scenes/Stage_THREE.unity
+    guid: d976673eb9c4a644a91249d6715c3576
+  - enabled: 1
+    path: Assets/00.Scenes/Stage_FOUR.unity
+    guid: 2b1e33c384ddc4c4fb1ed5be47c029f8
+  - enabled: 1
     path: Assets/00.Scenes/ClearOver.unity
     guid: ad76f9a50dd22ef438b6869d75a198e4
   m_configObjects: {}

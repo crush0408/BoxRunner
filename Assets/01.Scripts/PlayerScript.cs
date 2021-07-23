@@ -7,7 +7,7 @@ public class PlayerScript : MonoBehaviour
     public AudioClip BoxCreat;
     public GameObject map;
     Rigidbody2D rigid;
-    
+
     float jumpPower;
     float gravityPower;
     bool isGround;
@@ -76,25 +76,29 @@ public class PlayerScript : MonoBehaviour
     }
     public void CreateBox()
     {
-        if (!isBox)
+        if (DataManager.instance.isPlaying)
         {
+            if (!isBox)
+            {
 
-            var boxObj = PoolManager.instance.GetObject();
-            boxObj.transform.position = new Vector3(this.transform.position.x + (this.gameObject.transform.localScale.x + 0.5f), this.transform.position.y + 0.5f, this.transform.position.z);
-            
-            boxObj.transform.SetParent(map.transform);
-        }
-        else
-        {
+                var boxObj = PoolManager.instance.GetObject();
+                boxObj.transform.position = new Vector3(this.transform.position.x + (this.gameObject.transform.localScale.x + 0.5f), this.transform.position.y + 0.5f, this.transform.position.z);
 
-            var boxObj = PoolManager.instance.GetObject();
-            boxObj.transform.position = new Vector3(this.transform.position.x, this.transform.position.y + 0.5f, this.transform.position.z);
-            this.gameObject.transform.position = new Vector3(
-                this.transform.position.x, this.transform.position.y + 1f, this.transform.position.z
-            );
-            
-            boxObj.transform.SetParent(map.transform);
+                boxObj.transform.SetParent(map.transform);
+            }
+            else
+            {
+
+                var boxObj = PoolManager.instance.GetObject();
+                boxObj.transform.position = new Vector3(this.transform.position.x, this.transform.position.y + 0.5f, this.transform.position.z);
+                this.gameObject.transform.position = new Vector3(
+                    this.transform.position.x, this.transform.position.y + 1f, this.transform.position.z
+                );
+
+                boxObj.transform.SetParent(map.transform);
+            }
         }
+
 
     }
 
@@ -105,7 +109,8 @@ public class PlayerScript : MonoBehaviour
     }
     private void Update()
     {
-        if(DataManager.instance.isPlaying){
+        if (DataManager.instance.isPlaying)
+        {
             GroundCheck();
             BoxCheck();
         }

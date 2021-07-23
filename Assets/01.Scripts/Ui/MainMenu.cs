@@ -23,6 +23,9 @@ public class MainMenu : MonoBehaviour
         backVol = PlayerPrefs.GetFloat("backVol", 1f);
         Volum.value = backVol;
         BGM.volume = Volum.value;
+
+
+        
         
         
     }
@@ -47,6 +50,11 @@ public class MainMenu : MonoBehaviour
     public void LevelSelect()
     {
         SceneManager.LoadScene("LevelSelect");
+    }
+
+    public void AudioCon()
+    {
+        
     }
 
 

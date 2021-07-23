@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.UI;
 using System.Collections;
 using System.Collections.Generic;
 
@@ -11,6 +12,8 @@ public class EffectSource
 
 public class MGSound : MonoBehaviour
 {
+    public Slider EffectVolume;
+    public AudioSource soundSource;
     public GameObject[] _bgmObj;
     public GameObject[] _effObj;
 
@@ -22,6 +25,7 @@ public class MGSound : MonoBehaviour
     private int _effIdx = 0;
 
     private int _effMaxNum;
+    public float masterSoundVolume;
 
     public static MGSound _instance;
     public static MGSound instance
@@ -66,7 +70,7 @@ public class MGSound : MonoBehaviour
             efs.mySource = _effObj[i].GetComponent<AudioSource>();
             efs.myName = "";
             efs.bPlayed = false;
-            
+
             _effSource.Add(efs);
         }
 
@@ -74,6 +78,13 @@ public class MGSound : MonoBehaviour
 
         for (int i = 0; i < audios.Length; i++)
             _audioClipDic.Add(audios[i].name, audios[i]);
+    }
+    public void PlaySound(float vol, AudioClip myClip)     //adjust preferred volume of particular clip in "vol" 
+    {
+        EffectVolume.value= soundSource.volume;
+        soundSource.clip = myClip;
+        soundSource.volume = masterSoundVolume * vol;
+        soundSource.Play();
     }
 
     void OnEnable()
@@ -109,7 +120,7 @@ public class MGSound : MonoBehaviour
         }
         */
     }
-    
+
     public void playBgm(string bgmName)
     {
         //if (Environments._bgmOn == 0) return;
@@ -120,7 +131,7 @@ public class MGSound : MonoBehaviour
         _bgmSource[_bgmIdx].clip = _audioClipDic[bgmName];
         _bgmSource[_bgmIdx].loop = true;
         _bgmSource[_bgmIdx].Play();
-        
+
         StartCoroutine("crossBgm");
     }
 
@@ -163,7 +174,7 @@ public class MGSound : MonoBehaviour
         float newVolumn = 0;
         int prevIdx = _bgmIdx - 1;
 
-        if (prevIdx < 0 )
+        if (prevIdx < 0)
             prevIdx = 1;
 
         while (newVolumn < 1)
@@ -172,9 +183,9 @@ public class MGSound : MonoBehaviour
             newVolumn = Mathf.Clamp(newVolumn, 0, 1);
 
             if (_bgmSource[prevIdx].clip != null)
-	        {
+            {
                 _bgmSource[prevIdx].volume = (1 - newVolumn) / 2;
-	        }
+            }
 
             _bgmSource[_bgmIdx].volume = newVolumn / 2;
 
