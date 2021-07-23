@@ -105,8 +105,10 @@ public class PlayerScript : MonoBehaviour
     }
     private void Update()
     {
-        GroundCheck();
-        BoxCheck();
+        if(DataManager.instance.isPlaying){
+            GroundCheck();
+            BoxCheck();
+        }
         //Jump();
     }
 }

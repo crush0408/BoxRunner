@@ -475,6 +475,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6a9765a429d33524e80672208eb2e5fb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  index: 0
   GoalPos: {fileID: 798285278}
   StartPos: {fileID: 1060467450}
   Player: {fileID: 336191480}

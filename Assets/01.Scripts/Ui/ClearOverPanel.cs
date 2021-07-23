@@ -6,7 +6,7 @@ using UnityEngine.UI;
 
 public class ClearOverPanel : MonoBehaviour
 {
-    StageSelect stageSelect;
+    public StageSelect stageSelect;
     // Start is called before the first frame update
     void Start()
     {
@@ -15,6 +15,7 @@ public class ClearOverPanel : MonoBehaviour
     void Awake()
     {
         stageSelect = FindObjectOfType<StageSelect>();
+        Debug.Log(stageSelect.index);
     }
 
     // Update is called once per frame
@@ -26,6 +27,7 @@ public class ClearOverPanel : MonoBehaviour
     {
 
         SceneManager.LoadScene("LevelSelect");
+        //SceneManager.LoadScene(UnityEngine.SceneManagement.SceneManager.GetActiveScene().buildIndex + 1);
     }
     public void nextStage()
     {
@@ -47,6 +49,9 @@ public class ClearOverPanel : MonoBehaviour
     }
     public void RetryStage()
     {
+        SceneManager.LoadScene(stageSelect.index + 1);
+        
+
         if(stageSelect.index == 0)
         {
             SceneManager.LoadScene(1);

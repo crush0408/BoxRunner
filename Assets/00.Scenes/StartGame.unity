@@ -1357,10 +1357,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   key: 0
+  cur_index: 0
   isClear: 0
   appleCount: 0
   totalAppleCount: 0
   achievement: 0
+  isPlaying: 1
 --- !u!4 &1379564226
 Transform:
   m_ObjectHideFlags: 0

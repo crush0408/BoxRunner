@@ -8,12 +8,14 @@ public class MapMove : MonoBehaviour
     float moveSpeed = 10f;
     void Start()
     {
-        
+        //Debug.Log(DataManager.instance.isPlaying);
     }
 
     // Update is called once per frame
     void Update()
     {
-        transform.Translate(Vector3.left * Time.deltaTime * moveSpeed);
+        if(DataManager.instance.isPlaying){
+            transform.Translate(Vector3.left * Time.deltaTime * moveSpeed);
+        }
     }
 }

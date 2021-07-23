@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 using DG.Tweening;
 
 public class StageSelect : MonoBehaviour
@@ -87,7 +88,8 @@ public class StageSelect : MonoBehaviour
                 // {
                 //     Stages[4].DOScale(new Vector3(0, 0, 0), 0);
                 // }
-            }
+            } 
+            
         }
         if (index == 1)
         {
@@ -175,7 +177,8 @@ public class StageSelect : MonoBehaviour
         {
             if (index == i)
             {
-                //인덱스의 값에 따라 스테이지 이동
+                SceneManager.LoadScene(i+2);
+                DataManager.instance.cur_index = index;
             }
         }
     }

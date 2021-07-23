@@ -6,11 +6,13 @@ public class DataManager : MonoBehaviour
 {
     public static DataManager instance;
     public int key = 0;
-    
+    public int cur_index = 0;
     public bool isClear;
     public int appleCount;
     public int totalAppleCount;
     public float achievement;
+
+    public bool isPlaying = true;
     void Start()
     {
         DontDestroyOnLoad(this);

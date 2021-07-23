@@ -32,6 +32,7 @@ public class StageManager : MonoBehaviour
         startX = player.transform.position.x;
         finishX = finish.transform.position.x;
         totalDistance = finishX - startX;
+        DataManager.instance.isPlaying = true;
     }
     void Start()
     {
@@ -41,15 +42,17 @@ public class StageManager : MonoBehaviour
 
     void Update()
     {
-        if(Input.GetKeyDown(KeyCode.S)){
+        if(DataManager.instance.isPlaying){
             Achievement();
         }
+        
     }
     public void Achievement(){
-        float curDis = player.transform.position.x - startX;
+        float curDis = (player.transform.position.x - startX) + (finishX - finish.transform.position.x);
         _achievement = (curDis / totalDistance);
-        Debug.Log(_achievement);
-        Debug.Log((int)(_achievement * 100) + "%");
+        
+        //Debug.Log(_achievement);
+        //Debug.Log((int)(_achievement * 100) + "%");
     }
     public void AppleUpdate(){
         apple++;

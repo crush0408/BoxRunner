@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 using DG.Tweening;
 
 public class IngameMenu : MonoBehaviour
@@ -9,6 +10,8 @@ public class IngameMenu : MonoBehaviour
     public Slider StageCurBar;
     StageManager stageManager;
     public Transform StopMenu;
+
+    public Text delayText;
     
     // Start is called before the first frame update
     void Start()
@@ -24,7 +27,9 @@ public class IngameMenu : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        StageCur();  
+        if(DataManager.instance.isPlaying){
+            StageCur();  
+        }
     }
 
     void StageCur()
@@ -37,13 +42,35 @@ public class IngameMenu : MonoBehaviour
     {
         StopMenu.DOScale(new Vector3(1, 1, 1), 0.2f).OnComplete(delegate ()
         {
-            Time.timeScale = 0f;
+            //Time.timeScale = 0f;
+            DataManager.instance.isPlaying = false;
         });
     }
     public void StopMenuClose()
     {
-        Time.timeScale = 1f;
-        StopMenu.DOScale(new Vector3(0, 0, 0), 0.2f);
+        //StopMenu.DOScale(new Vector3(0, 0, 0), 0.2f);
+        
+        StopMenu.DOScale(new Vector3(0, 0, 0), 0.2f).OnComplete(delegate ()
+        {
+            StartCoroutine(Delay());
+        });
+        
     }
-
+    public void Retry(){
+        SceneManager.LoadScene(UnityEngine.SceneManagement.SceneManager.GetActiveScene().buildIndex);
+        StartCoroutine(Delay());
+        //Time.timeScale = 1f;
+        
+    }
+    IEnumerator Delay(){
+        delayText.gameObject.SetActive(true);
+        delayText.text = "3";
+        yield return new WaitForSeconds(1f);
+        delayText.text = "2";
+        yield return new WaitForSeconds(1f);
+        delayText.text = "1";
+        yield return new WaitForSeconds(1f);
+        delayText.gameObject.SetActive(false);
+        DataManager.instance.isPlaying = true;
+    }
 }
