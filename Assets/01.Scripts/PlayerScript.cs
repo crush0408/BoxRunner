@@ -9,17 +9,23 @@ public class PlayerScript : MonoBehaviour
     float jumpPower;
     float gravityPower;
     bool isGround;
+    public bool isBox;
     [SerializeField]
     private Transform ground;
     [SerializeField]
     private LayerMask whatIsGround;
+    [SerializeField]
+    private LayerMask whatIsBox;
     public float boxDistance;
+    
     private void Init(){
         rigid = GetComponent<Rigidbody2D>();
         GroundCheck();
+        BoxCheck();
         jumpPower = 5f;
         gravityPower = 7f;
     }
+    /*
     public void Jump(){
         if(isGround){
             
@@ -30,9 +36,10 @@ public class PlayerScript : MonoBehaviour
         }
         
     }
-    IEnumerator Gravity(){
-        yield return new WaitForSeconds(0.5f);
+    */
+    private void Gravity(){
         rigid.AddForce(Vector2.down * gravityPower * 20);
+        
     }
     private void GroundCheck()
     {
@@ -42,27 +49,44 @@ public class PlayerScript : MonoBehaviour
             
         }
     }
-    private void CreateBox(){
-        if (Input.GetKeyDown(KeyCode.S))
-        {
-
-            var boxObj = PoolManager.instance.GetObject();
-            boxObj.transform.position = new Vector3(this.transform.position.x + (this.gameObject.transform.localScale.x + 0.5f), this.transform.position.y + 0.5f, this.transform.position.z);
-            boxObj.transform.SetParent(map.transform);
+    private void BoxCheck(){
+        if(rigid.velocity.y < 0){
+            isBox = Physics2D.OverlapCircle(ground.position,0.3f,whatIsBox);
+            /*
+            if(Physics2D.Raycast(transform.position,Vector2.down, 10f,out hit)){
+                
+            }
+            */
         }
     }
+    private void CreateBox(){
+        if (Input.GetKeyDown(KeyCode.S) )//&& isGround)
+        {
+            if(!isBox){
+
+                var boxObj = PoolManager.instance.GetObject();
+                boxObj.transform.position = new Vector3(this.transform.position.x + (this.gameObject.transform.localScale.x + 0.5f), this.transform.position.y + 0.5f, this.transform.position.z);
+                boxObj.transform.SetParent(map.transform);
+            }
+            else{
+                
+                var boxObj = PoolManager.instance.GetObject();
+                boxObj.transform.position = new Vector3(this.transform.position.x, this.transform.position.y + 0.5f, this.transform.position.z);
+                this.gameObject.transform.position = new Vector3(
+                    this.transform.position.x,this.transform.position.y + 1f,this.transform.position.z
+                );
+                boxObj.transform.SetParent(map.transform);
+            }
+        }
+    }
+    
     private void Awake(){
         Init();
     }
     private void Update(){
         GroundCheck();
+        BoxCheck();
         //Jump();
         CreateBox();
     }
-
-    void OnColliderEnter2D(Collision2D other)
-    {
-        
-    }
-    
 }

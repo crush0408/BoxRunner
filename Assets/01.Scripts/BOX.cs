@@ -11,19 +11,35 @@ public class BOX : MonoBehaviour
         rigid = GetComponent<Rigidbody2D>();
     }
 
+    private void OnEnable() 
+    {
+        StartCoroutine(Return());
+    }
     // Update is called once per frame
     void Update()
     {
-        if(this.gameObject.transform.position.x < -14f){
-            PoolManager.instance.ReturnObject(this);
-        }
+            /*
+            if(this.gameObject.transform.position.x < -20f){
+                PoolManager.instance.ReturnObject(this);
+                Debug.Log("Return");
+            }
+            */
+        
+    }
+    IEnumerator Return(){
+        yield return new WaitForSeconds(1f);
+        PoolManager.instance.ReturnObject(this);
+        Debug.Log("Return_" + this.gameObject.name);
+        
+        
     }
     private void OnCollisionEnter2D(Collision2D col)
     {
         if(!(col.gameObject.CompareTag("GROUND") || col.gameObject.CompareTag("BOX")))
         {
-            rigid.AddForce(Vector2.down * 200);
+            rigid.AddForce(Vector2.down * 500);
             
         }
     }
+    
 }

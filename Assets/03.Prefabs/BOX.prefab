@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 5607085990534636697}
   - component: {fileID: -4322996083504440061}
   - component: {fileID: 1088196804369117493}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: BOX
   m_TagString: BOX
   m_Icon: {fileID: 0}
@@ -134,7 +134,7 @@ Rigidbody2D:
   m_GameObject: {fileID: 5607085990534636700}
   m_BodyType: 0
   m_Simulated: 1
-  m_UseFullKinematicContacts: 0
+  m_UseFullKinematicContacts: 1
   m_UseAutoMass: 0
   m_Mass: 1
   m_LinearDrag: 0
