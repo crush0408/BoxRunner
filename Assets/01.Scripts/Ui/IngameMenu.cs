@@ -6,6 +6,8 @@ using DG.Tweening;
 
 public class IngameMenu : MonoBehaviour
 {
+    public Slider StageCurBar;
+    StageManager stageManager;
     public Transform StopMenu;
     
     // Start is called before the first frame update
@@ -14,14 +16,21 @@ public class IngameMenu : MonoBehaviour
         StopMenu.transform.localScale = Vector3.zero;
         
     }
+    void Awake()
+    {
+        stageManager = FindObjectOfType<StageManager>();
+    }
 
     // Update is called once per frame
     void Update()
     {
-        
+        StageCur();  
     }
 
-   
+    void StageCur()
+    {
+        StageCurBar.value = stageManager._achievement * 100;
+    }
 
 
     public void StopMenuOpen()

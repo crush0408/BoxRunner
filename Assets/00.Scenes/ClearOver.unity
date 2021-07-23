@@ -902,7 +902,7 @@ GameObject:
   - component: {fileID: 1230555256}
   - component: {fileID: 1230555255}
   m_Layer: 5
-  m_Name: "\uB2E4\uC2DC\uD50C\uB808\uC774 (1)"
+  m_Name: nextStage
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -971,7 +971,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1230555256}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 207958411}
+        m_TargetAssemblyTypeName: ClearOverPanel, Assembly-CSharp
+        m_MethodName: nextStage
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1230555256
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1123,8 +1135,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 10.074, y: -214.1}
-  m_SizeDelta: {x: 160, y: 30}
+  m_AnchoredPosition: {x: 16.037, y: -201.98}
+  m_SizeDelta: {x: 171.93, y: 54.241}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1307913761
 MonoBehaviour:
@@ -1148,10 +1160,10 @@ MonoBehaviour:
       m_Calls: []
   m_FontData:
     m_Font: {fileID: 12800000, guid: ad14c38cebb6d5745af6e402333e2e8b, type: 3}
-    m_FontSize: 14
+    m_FontSize: 28
     m_FontStyle: 0
     m_BestFit: 0
-    m_MinSize: 10
+    m_MinSize: 2
     m_MaxSize: 40
     m_Alignment: 4
     m_AlignByGeometry: 0
@@ -1159,7 +1171,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 78%
+  m_Text: 
 --- !u!222 &1307913762
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -1634,8 +1646,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -38, y: -214.1}
-  m_SizeDelta: {x: 160, y: 30}
+  m_AnchoredPosition: {x: -54.968872, y: -201.9794}
+  m_SizeDelta: {x: 193.9377, y: 54.2412}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1634100002
 MonoBehaviour:
@@ -1659,7 +1671,7 @@ MonoBehaviour:
       m_Calls: []
   m_FontData:
     m_Font: {fileID: 12800000, guid: ad14c38cebb6d5745af6e402333e2e8b, type: 3}
-    m_FontSize: 14
+    m_FontSize: 28
     m_FontStyle: 0
     m_BestFit: 0
     m_MinSize: 10
@@ -1791,7 +1803,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -138.67154, y: -277.30658}
+  m_AnchoredPosition: {x: -198, y: -277.30658}
   m_SizeDelta: {x: 162.6569, y: 44.6132}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &2091728260
@@ -1837,7 +1849,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 2091728261}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 207958411}
+        m_TargetAssemblyTypeName: ClearOverPanel, Assembly-CSharp
+        m_MethodName: RetryStage
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &2091728261
 MonoBehaviour:
   m_ObjectHideFlags: 0

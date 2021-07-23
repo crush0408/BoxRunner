@@ -39,7 +39,6 @@ public class StageManager : MonoBehaviour
         
     }
 
-    
     void Update()
     {
         if(Input.GetKeyDown(KeyCode.S)){

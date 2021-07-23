@@ -21,14 +21,9 @@ public class MainMenu : MonoBehaviour
     {
         setting.transform.localScale = Vector3.zero;
         backVol = PlayerPrefs.GetFloat("backVol", 1f);
-        EffVol = PlayerPrefs.GetFloat("EffVol", 1f);
         Volum.value = backVol;
-        Effect.value = EffVol;
         BGM.volume = Volum.value;
-        for(int i = 0; i < EffectSound.Length; i++)
-        {
-            EffectSound[i].volume = Effect.value;
-        }
+        
         
     }
 
@@ -39,16 +34,13 @@ public class MainMenu : MonoBehaviour
     }
     public void SoundCheck()
     {
-        for(int i = 0; i < EffectSound.Length; i++)
-        {
-            EffectSound[i].volume = Effect.value;
-        }
+        
         BGM.volume = Volum.value;
 
         backVol = Volum.value;
-        EffVol = Effect.value;
+        
         PlayerPrefs.SetFloat("backVol", backVol);
-        PlayerPrefs.SetFloat("EffVol", EffVol);
+    
 
     }
 

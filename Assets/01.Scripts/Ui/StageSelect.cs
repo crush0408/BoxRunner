@@ -6,7 +6,7 @@ using DG.Tweening;
 
 public class StageSelect : MonoBehaviour
 {
-    int index = 0;
+    public int index = 0;
     public Transform GoalPos;
 
     public Transform StartPos;
