@@ -5,14 +5,14 @@ using UnityEngine;
 public class Coin : MonoBehaviour
 {
     StageManager stageManager;
-    void Start()
+    void Awake()
     {
         stageManager = FindObjectOfType<StageManager>();
     }
 
     private void OnTriggerEnter2D(Collider2D col){
         if(col.gameObject.CompareTag("PLAYER")){
-            stageManager.CoinUpdate();
+            stageManager.AppleUpdate();
             Destroy(this.gameObject);
         }
     }

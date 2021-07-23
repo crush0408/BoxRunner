@@ -7,6 +7,7 @@ TagManager:
   - BOX
   - GROUND
   - PLAYER
+  - APPLE
   layers:
   - Default
   - TransparentFX

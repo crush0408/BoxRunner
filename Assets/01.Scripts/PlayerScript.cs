@@ -7,7 +7,7 @@ public class PlayerScript : MonoBehaviour
     public AudioClip BoxCreat;
     public GameObject map;
     Rigidbody2D rigid;
-
+    
     float jumpPower;
     float gravityPower;
     bool isGround;
@@ -21,6 +21,7 @@ public class PlayerScript : MonoBehaviour
     public float boxDistance;
 
     AudioSource audioSource;
+
 
     private void Init()
     {
@@ -80,6 +81,7 @@ public class PlayerScript : MonoBehaviour
 
             var boxObj = PoolManager.instance.GetObject();
             boxObj.transform.position = new Vector3(this.transform.position.x + (this.gameObject.transform.localScale.x + 0.5f), this.transform.position.y + 0.5f, this.transform.position.z);
+            
             boxObj.transform.SetParent(map.transform);
         }
         else
@@ -90,6 +92,7 @@ public class PlayerScript : MonoBehaviour
             this.gameObject.transform.position = new Vector3(
                 this.transform.position.x, this.transform.position.y + 1f, this.transform.position.z
             );
+            
             boxObj.transform.SetParent(map.transform);
         }
 

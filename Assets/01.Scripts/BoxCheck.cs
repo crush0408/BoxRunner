@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class BoxCheck : MonoBehaviour
 {
+    public GameObject bg;
     public PlayerScript player;
     public float jump;
     public float width;
@@ -23,6 +24,7 @@ public class BoxCheck : MonoBehaviour
         {
             player.transform.position = new Vector3(col.gameObject.transform.position.x + width,
             col.gameObject.transform.position.y + jump,col.transform.position.z);
+            
         }
     }
 }

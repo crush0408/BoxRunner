@@ -7,6 +7,10 @@ public class DataManager : MonoBehaviour
     public static DataManager instance;
     public int key = 0;
     
+    public bool isClear;
+    public int appleCount;
+    public int totalAppleCount;
+    public float achievement;
     void Start()
     {
         DontDestroyOnLoad(this);
