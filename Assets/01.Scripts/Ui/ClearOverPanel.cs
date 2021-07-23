@@ -7,7 +7,7 @@ using UnityEngine.UI;
 public class ClearOverPanel : MonoBehaviour
 {
     public StageSelect stageSelect;
-    // Start is called before the first frame update
+    
     void Start()
     {
 

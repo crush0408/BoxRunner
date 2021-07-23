@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class PlayerScript : MonoBehaviour
 {
+    public Animator animator;
     public AudioClip BoxCreat;
     public GameObject map;
     Rigidbody2D rigid;
@@ -25,6 +26,7 @@ public class PlayerScript : MonoBehaviour
 
     private void Init()
     {
+        animator = GetComponent<Animator>();
         rigid = GetComponent<Rigidbody2D>();
         GroundCheck();
         BoxCheck();
