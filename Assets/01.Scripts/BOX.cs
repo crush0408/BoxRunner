@@ -4,10 +4,12 @@ using UnityEngine;
 
 public class BOX : MonoBehaviour
 {
+    public Animator animator;
     Rigidbody2D rigid;
     public static bool isb = true;
     void Start()
     {
+        animator = GetComponent<Animator>();
         rigid = GetComponent<Rigidbody2D>();
     }
 
@@ -18,12 +20,6 @@ public class BOX : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-            /*
-            if(this.gameObject.transform.position.x < -20f){
-                PoolManager.instance.ReturnObject(this);
-                Debug.Log("Return");
-            }
-            */
         
     }
     IEnumerator Return(){
