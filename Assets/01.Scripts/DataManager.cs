@@ -11,31 +11,41 @@ public class DataManager : MonoBehaviour
     public int appleCount;
     public int totalAppleCount;
     public float achievement;
-    public float masterSoundVolume;
-    
+    public float BGMmasterSoundVolume;
+    public float EFFmasterSoundVolume;
+
     public bool isPlaying = true;
-    void Start()
+    void Awake()
     {
+        MGSound.instance.init();
         DontDestroyOnLoad(this);
         instance = this;
         Load();
+    }
+    void Start()
+    {
+
     }
 
     // Update is called once per frame
     void Update()
     {
-        if(Input.GetKeyDown(KeyCode.Q)){
+        if (Input.GetKeyDown(KeyCode.Q))
+        {
             Save();
         }
-        if(Input.GetKeyDown(KeyCode.W)){
+        if (Input.GetKeyDown(KeyCode.W))
+        {
             Load();
         }
-        
+
     }
-    public void Save(){
-        PlayerPrefs.SetInt("KEY",key);
+    public void Save()
+    {
+        PlayerPrefs.SetInt("KEY", key);
     }
-    public void Load(){
+    public void Load()
+    {
         print(PlayerPrefs.GetInt("KEY"));
         key = PlayerPrefs.GetInt("KEY");
     }

@@ -38,8 +38,8 @@ public class PlayerScript : MonoBehaviour
 
     public void AudioPlay()
     {
-        audioSource.clip = BoxCreat;
-        audioSource.Play();
+        MGSound.instance.playEff("Box");
+        
     }
     
     public void Jump(){

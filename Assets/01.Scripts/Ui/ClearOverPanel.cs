@@ -6,6 +6,7 @@ using UnityEngine.UI;
 
 public class ClearOverPanel : MonoBehaviour
 {
+    public Text[] Point;
     public int _index;
     public float _achievement;
     public int _appleCount;
@@ -15,7 +16,8 @@ public class ClearOverPanel : MonoBehaviour
     {
         InitData();
     }
-    private void InitData(){
+    private void InitData()
+    {
         _index = DataManager.instance.cur_index;
         _achievement = DataManager.instance.achievement;
         _appleCount = DataManager.instance.appleCount;
@@ -29,6 +31,17 @@ public class ClearOverPanel : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        Point[0].text = DataManager.instance.isClear.ToString();
+        Point[1].text = string.Format("{0:n0}", _achievement * 100);
+        Point[2].text = _appleCount.ToString();
+        if (DataManager.instance.isClear)
+        {
+            Point[0].text = "성공";
+        }
+        else
+        {
+            Point[0].text = "실패";
+        }
 
     }
     public void SelectStage()

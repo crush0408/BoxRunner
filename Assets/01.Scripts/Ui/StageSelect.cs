@@ -177,6 +177,10 @@ public class StageSelect : MonoBehaviour
         DataManager.instance.cur_index = index + 2;
 
     }
+    public void GoMain()
+    {
+        SceneManager.LoadScene("StartGame");
+    }
     /*
     public void SelectStage() //스테이지 선택
     {

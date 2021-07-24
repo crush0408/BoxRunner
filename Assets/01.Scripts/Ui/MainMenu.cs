@@ -16,20 +16,29 @@ public class MainMenu : MonoBehaviour
     public Sprite Main2Back;
     public Slider Volum;
     public Slider Effect;
-    public AudioSource BGM;
-    public AudioSource[] EffectSound;
+
 
     float backVol = 1f;
     float EffVol = 1f;
     public Transform setting;
 
+    void Awake()
+    {
+    
+        MGSound.instance.init();
+        
+    }
     // Start is called before the first frame update
     void Start()
     {
         setting.transform.localScale = Vector3.zero;
         backVol = PlayerPrefs.GetFloat("backVol", 1f);
+        EffVol = PlayerPrefs.GetFloat("EffVol", 1f);
         Volum.value = backVol;
-        BGM.volume = Volum.value;
+        Effect.value = EffVol;
+        DataManager.instance.BGMmasterSoundVolume = Volum.value;
+        DataManager.instance.EFFmasterSoundVolume = Effect.value;
+        MGSound.instance.playBgm("Main");
     }
 
     // Update is called once per frame
@@ -39,21 +48,33 @@ public class MainMenu : MonoBehaviour
     }
     public void SoundCheck()
     {
-        
-        BGM.volume = Volum.value;
 
+        DataManager.instance.BGMmasterSoundVolume = Volum.value;
+        
+        DataManager.instance.EFFmasterSoundVolume = Effect.value;
+        EffVol = Effect.value;
         backVol = Volum.value;
-        if(backVol <=0)
+        if (EffVol <= 0)
+        {
+            Main2.sprite = Main2Change;
+        }
+        if (EffVol >= 0.1f)
+        {
+            Main2.sprite = Main2Back;
+        }
+
+        if (backVol <= 0)
         {
             Main1.sprite = Main1Change;
         }
-        if(backVol >=0.1f)
+        if (backVol >= 0.1f)
         {
             Main1.sprite = Main1Back;
         }
-        
+
         PlayerPrefs.SetFloat("backVol", backVol);
-    
+        PlayerPrefs.SetFloat("EffVol", EffVol);
+
 
     }
 
@@ -64,7 +85,7 @@ public class MainMenu : MonoBehaviour
 
     public void AudioCon()
     {
-        
+       MGSound.instance.AdjustVolume();
     }
 
 

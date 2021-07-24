@@ -79,14 +79,6 @@ public class MGSound : MonoBehaviour
         for (int i = 0; i < audios.Length; i++)
             _audioClipDic.Add(audios[i].name, audios[i]);
     }
-    public void PlaySound(float vol, AudioClip myClip)     //adjust preferred volume of particular clip in "vol" 
-    {
-        EffectVolume.value= soundSource.volume;
-        soundSource.clip = myClip;
-        soundSource.volume = masterSoundVolume * vol;
-        soundSource.Play();
-    }
-
     void OnEnable()
     {
 
@@ -130,6 +122,7 @@ public class MGSound : MonoBehaviour
 
         _bgmSource[_bgmIdx].clip = _audioClipDic[bgmName];
         _bgmSource[_bgmIdx].loop = true;
+        _bgmSource[_bgmIdx].volume = DataManager.instance.BGMmasterSoundVolume;
         _bgmSource[_bgmIdx].Play();
 
         StartCoroutine("crossBgm");
@@ -139,8 +132,12 @@ public class MGSound : MonoBehaviour
     {
         _bgmSource[_bgmIdx].Stop();
     }
+    public void AdjustVolume()
+    {
+        AudioListener.volume = DataManager.instance.BGMmasterSoundVolume;
+    }
 
-    public void playEff(string effName, float volume)
+    public void playEff(string effName, float volume = 100f)
     {
         //if (Environments._effOn == 0) return;
 
@@ -161,7 +158,7 @@ public class MGSound : MonoBehaviour
         _effSource[_effIdx].myName = effName;
         _effSource[_effIdx].mySource.clip = _audioClipDic[effName];
         _effSource[_effIdx].mySource.loop = false;
-        _effSource[_effIdx].mySource.volume = volume;
+        _effSource[_effIdx].mySource.volume = volume * DataManager.instance.EFFmasterSoundVolume;
         _effSource[_effIdx].mySource.Play();
         _effSource[_effIdx].bPlayed = true;
 
