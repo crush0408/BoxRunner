@@ -34,7 +34,7 @@ public class BOX : MonoBehaviour
     {
         if(col.gameObject.CompareTag("SPIKE")){
             //박스 애니메이션 실행
-            PoolManager.instance.ReturnObject(this);
+            animator.SetTrigger("IsDestroy");
             Debug.Log("Return_" + this.gameObject.name);
         }
         else if(!(col.gameObject.CompareTag("GROUND") || col.gameObject.CompareTag("BOX")))// && !col.gameObject.CompareTag("SPIKE"))
@@ -42,6 +42,9 @@ public class BOX : MonoBehaviour
             rigid.AddForce(Vector2.down * 500);
             Debug.Log("떨어짐");   
         }
+    }
+    public void D(){
+        PoolManager.instance.ReturnObject(this);
     }
     
 }

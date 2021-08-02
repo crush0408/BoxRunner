@@ -173,8 +173,11 @@ public class StageSelect : MonoBehaviour
 
     public void TouchStage()
     {
-        SceneManager.LoadScene(index+2);
-        DataManager.instance.cur_index = index + 2;
+        if(index == 0){
+
+            SceneManager.LoadScene(index+2);
+            DataManager.instance.cur_index = index + 2;
+        }
 
     }
     public void GoMain()

@@ -16,7 +16,7 @@ public class Gear : MonoBehaviour
     void Start()
     {
         this.gameObject.transform.SetParent(map.transform);
-        movePos.gameObject.transform.SetParent(null);
+        movePos.gameObject.transform.SetParent(this.transform);
     }
 
     // Update is called once per frame

@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 
 public class PlayerScript : MonoBehaviour
@@ -12,7 +13,7 @@ public class PlayerScript : MonoBehaviour
     StageManager stageManager;
     float jumpPower;
     float gravityPower;
-    bool isGround;
+    public bool isGround;
     public bool isBox;
     [SerializeField]
     private Transform ground;
@@ -23,13 +24,14 @@ public class PlayerScript : MonoBehaviour
     public float boxDistance;
 
     AudioSource audioSource;
-
+    public Text boxText;
     public int canBox;
     private void Init()
     {
         animator = GetComponent<Animator>();
         stageManager = FindObjectOfType<StageManager>();
         rigid = GetComponent<Rigidbody2D>();
+        BoxUpdate();
         GroundCheck();
         BoxCheck();
         jumpPower = 10f;
@@ -44,13 +46,13 @@ public class PlayerScript : MonoBehaviour
     
     public void Jump(){
         
-        if(isGround){
+        //if(isGround){
             rigid.velocity = Vector2.zero;
-            rigid.AddForce(Vector2.up * jumpPower * 100);
+            rigid.AddForce(Vector2.up * jumpPower * 150f);
             isGround = false;
             //Gravity();
             Debug.Log("JUMP");
-        }
+        //}
         
     }
     /*
@@ -92,6 +94,7 @@ public class PlayerScript : MonoBehaviour
 
                 boxObj.transform.SetParent(map.transform);
                 canBox--;
+                BoxUpdate();
             }
             else
             {
@@ -104,24 +107,28 @@ public class PlayerScript : MonoBehaviour
 
                 boxObj.transform.SetParent(map.transform);
                 canBox--;
+                BoxUpdate();
             }
         }
 
 
     }
-
+    public void BoxUpdate(){
+        boxText.text = $"{canBox}";
+    }
     private void Awake()
     {
         audioSource = FindObjectOfType<AudioSource>();
         Init();
+        
+        
     }
     private void Update()
     {
-        if (DataManager.instance.isPlaying)
-        {
             GroundCheck();
             BoxCheck();
-        }
+            BoxUpdate();
+            
         /*
         if(Input.GetKeyDown(KeyCode.S))
             Jump();
@@ -133,19 +140,28 @@ public class PlayerScript : MonoBehaviour
         }
         if(col.gameObject.CompareTag("SPIKE")){
             DataManager.instance.isPlaying = false;
+            animator.SetTrigger("isHit");
             //플레이어 애니메이션 재생
-            stageManager.GameResult(false);
-            SceneManager.LoadScene("ClearOver");
+            
+            
+        }
+    }
+    private void OnTriggerExit2D(Collider2D col){
+        if(col.gameObject.CompareTag("T")){
+            this.gameObject.GetComponent<BoxCollider2D>().isTrigger = false;
         }
     }
     private void OnTriggerEnter2D(Collider2D col){
-        if(col.gameObject.CompareTag("JUMP")){
-            Jump();
-            Debug.Log("JuMP");
-        }
+        
         if(col.gameObject.CompareTag("BOX_ADD")){
-            canBox++;
+            canBox += 3;
+            BoxUpdate();
             col.gameObject.SetActive(false);
         }
+        
+    }
+    public void D(){
+        stageManager.GameResult(false);
+        SceneManager.LoadScene("ClearOver");
     }
 }

@@ -10,9 +10,9 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 13312, guid: 0000000000000000e000000000000000, type: 0}
-  m_Name: Brown
+  m_Name: Terrain (16x16)_5
   m_EditorClassIdentifier: 
-  m_Sprite: {fileID: 21300000, guid: 896403347b6d7904cb817edf63ede3d6, type: 3}
+  m_Sprite: {fileID: -8620202154233844528, guid: f98f138b2003ca84ba37581131bd7e58, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_Transform:
     e00: 1

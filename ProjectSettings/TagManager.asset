@@ -13,6 +13,8 @@ TagManager:
   - T
   - FINISH
   - SPIKE
+  - Dead
+  - DEAD
   layers:
   - Default
   - TransparentFX

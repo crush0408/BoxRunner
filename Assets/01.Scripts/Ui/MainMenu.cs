@@ -5,6 +5,8 @@ using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using DG.Tweening;
 
+
+
 public class MainMenu : MonoBehaviour
 {
     public Image Main1;
@@ -97,4 +99,7 @@ public class MainMenu : MonoBehaviour
     {
         setting.DOScale(new Vector3(0, 0, 0), 0.2f);
     }
+
+    
+
 }

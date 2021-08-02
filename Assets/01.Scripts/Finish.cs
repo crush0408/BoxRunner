@@ -13,6 +13,7 @@ public class Finish : MonoBehaviour
         if(col.gameObject.CompareTag("PLAYER")){
             DataManager.instance.isPlaying = false;
             stageManager.GameResult(true);
+            DataManager.instance.achievement = 1f;
             SceneManager.LoadScene("ClearOver");
         }
     }
