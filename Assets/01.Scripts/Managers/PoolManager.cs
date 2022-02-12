@@ -7,6 +7,7 @@ public class PoolManager : MonoBehaviour
     public static PoolManager instance;
 
     public GameObject poolingObject;
+    public GameObject poolingObject_Christmas;
     public static int countID = 0;
     Queue<BOX> poolingObjectQueue = new Queue<BOX>();
     void Awake()
@@ -26,7 +27,16 @@ public class PoolManager : MonoBehaviour
     }
     private BOX CreateNewObject()
     {
-        var newObj = Instantiate(poolingObject).GetComponent<BOX>();
+        BOX newObj = null;
+        if (DataManager.instance.boxSkinIndex == 0)
+        {
+
+            newObj = Instantiate(poolingObject).GetComponent<BOX>();
+        }
+        else if(DataManager.instance.boxSkinIndex == 1)
+        {
+            newObj = Instantiate(poolingObject_Christmas).GetComponent<BOX>();
+        }
         newObj.gameObject.name += countID;
         countID++;
         newObj.gameObject.SetActive(false);

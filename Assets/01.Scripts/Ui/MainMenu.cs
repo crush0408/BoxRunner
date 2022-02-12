@@ -15,32 +15,24 @@ public class MainMenu : MonoBehaviour
 
     void Awake()
     {
-    
-        MGSound.instance.init();
+        
+        
+        
+        
         
         
     }
-    // Start is called before the first frame update
+    
     void Start()
     {
+        MGSound.instance.init();
+        MGSound.instance.playBgm("Main");
+
         ExitPanel.transform.localScale = Vector3.zero;
+        
     }
 
-    //void BlinkText()
-    //{
-    //    textCool += Time.deltaTime;
-    //    if(textCool <= joinCool)
-    //    {
-    //        MainLogoText.enabled = false;
-    //        textCool = 0;
-    //    }
-    //    if(textCool == 0)
-    //    {
-    //        MainLogoText.enabled = true;
-    //    }
-    //}
-
-    // Update is called once per frame
+    
     void Update()
     {
         //BlinkText();
@@ -67,10 +59,7 @@ public class MainMenu : MonoBehaviour
         SceneManager.LoadScene("LevelSelect");
     }
 
-    public void AudioCon()
-    {
-       MGSound.instance.AdjustVolume();
-    }
+
 
 
    

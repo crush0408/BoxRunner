@@ -18,6 +18,7 @@ public class Jump : MonoBehaviour
     
     private void OnTriggerEnter2D(Collider2D col){
         if(col.gameObject.CompareTag("PLAYER")){
+            MGSound.instance.playEff("Jump");
             player.Jump();
             Debug.Log("JuMP");
         }

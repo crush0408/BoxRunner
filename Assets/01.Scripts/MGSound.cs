@@ -12,8 +12,7 @@ public class EffectSource
 
 public class MGSound : MonoBehaviour
 {
-    public Slider EffectVolume;
-    public AudioSource soundSource;
+    
     public GameObject[] _bgmObj;
     public GameObject[] _effObj;
 
@@ -141,14 +140,14 @@ public class MGSound : MonoBehaviour
     {
         //if (Environments._effOn == 0) return;
 
-        if (_effSource[_effIdx].bPlayed && !_effSource[_effIdx].mySource.isPlaying)
+/*        if (_effSource[_effIdx].bPlayed && !_effSource[_effIdx].mySource.isPlaying)
         {
             if (_effSource[_effIdx].myName.Equals(effName))
             {
                 _effSource[_effIdx].bPlayed = false;
                 return;
             }
-        }
+        }*/
 
         //if (_effSource[_effIdx].bPlayed && !_effSource[_effIdx].mySource.isPlaying)
         //{

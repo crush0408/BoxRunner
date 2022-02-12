@@ -18,6 +18,9 @@ public class StageManager : MonoBehaviour
     public float totalDistance;
     public GameObject[] apples;
 
+    public Button boxCreateBtn;
+    public Transform LTrm;
+    public Transform RTrm;
     
     void Awake(){
         player = FindObjectOfType<PlayerScript>();
@@ -33,11 +36,38 @@ public class StageManager : MonoBehaviour
         finishX = finish.transform.position.x;
         totalDistance = finishX - startX;
         DataManager.instance.isPlaying = true;
+        if(DataManager.instance.isLeftHand == true)
+        {
+            boxCreateBtn.transform.position = LTrm.position;
+        }
+        else
+        {
+            boxCreateBtn.transform.position = RTrm.position;
+        }
     }
     void Start()
     {
-        
-        
+        GameObject[] games = GameObject.FindGameObjectsWithTag("BOX_ADD");
+        Debug.Log(games.Length);
+        if (DataManager.instance.boxSkinIndex == 0)
+        {
+
+            
+            for (int i = 0; i < games.Length; i++)
+            {
+                games[i].GetComponent<SpriteRenderer>().sprite = Resources.Load<Sprite>("BOX");
+
+            }
+        }
+        else if (DataManager.instance.boxSkinIndex == 1)
+        {
+            for (int i = 0; i < games.Length; i++)
+            {
+                games[i].GetComponent<SpriteRenderer>().sprite = Resources.Load<Sprite>("BOX2");
+            }
+        }
+
+        MGSound.instance.playBgm("Ingame");
     }
 
     void Update()
@@ -58,6 +88,7 @@ public class StageManager : MonoBehaviour
         //Debug.Log((int)(_achievement * 100) + "%");
     }
     public void AppleUpdate(){
+        
         _appleCount++;
         appleText.text = $"{_appleCount} / {_totalAppleCount}";
     }
@@ -67,5 +98,21 @@ public class StageManager : MonoBehaviour
         DataManager.instance.appleCount = _appleCount;
         DataManager.instance.totalAppleCount = _totalAppleCount;
         DataManager.instance.achievement = _achievement;
+        if(_isClear)
+        {
+            if(HeartManager.Instance.m_HeartAmount < 10)
+            {
+
+                HeartManager.Instance.m_HeartAmount++;
+                if (HeartManager.Instance.m_HeartAmount == 10)
+                    HeartManager.Instance.m_RechargeRemainTime = 0;
+            }
+            if((DataManager.instance.cur_index -2) >= DataManager.instance.key)
+            {
+                DataManager.instance.key++;
+                DataManager.instance.Save();
+            }
+
+        }
     }
 }

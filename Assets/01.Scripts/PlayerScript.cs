@@ -15,15 +15,21 @@ public class PlayerScript : MonoBehaviour
     float gravityPower;
     public bool isGround;
     public bool isBox;
+    public bool isJump;
     [SerializeField]
     private Transform ground;
+    [SerializeField]
+    private Transform jump;
     [SerializeField]
     private LayerMask whatIsGround;
     [SerializeField]
     private LayerMask whatIsBox;
+    [SerializeField]
+    private LayerMask whatIsJump;
     public float boxDistance;
 
-    AudioSource audioSource;
+    public float deathY;
+
     public Text boxText;
     public int canBox;
     private void Init()
@@ -34,15 +40,15 @@ public class PlayerScript : MonoBehaviour
         BoxUpdate();
         GroundCheck();
         BoxCheck();
+        JumpCheck();
         jumpPower = 10f;
         gravityPower = 7f;
     }
 
-    public void AudioPlay()
-    {
-        MGSound.instance.playEff("Box");
+    
         
-    }
+        
+   
     
     public void Jump(){
         
@@ -82,9 +88,13 @@ public class PlayerScript : MonoBehaviour
             */
         }
     }
+    private void JumpCheck()
+    {
+        isJump = Physics2D.Raycast(jump.position, Vector2.up, 1.9f, whatIsJump);
+    }
     public void CreateBox()
     {
-        if (DataManager.instance.isPlaying && canBox > 0)
+        if (DataManager.instance.isPlaying && canBox > 0 && !isJump)
         {
             if (!isBox)
             {
@@ -95,6 +105,7 @@ public class PlayerScript : MonoBehaviour
                 boxObj.transform.SetParent(map.transform);
                 canBox--;
                 BoxUpdate();
+                MGSound.instance.playEff("Box");
             }
             else
             {
@@ -108,26 +119,36 @@ public class PlayerScript : MonoBehaviour
                 boxObj.transform.SetParent(map.transform);
                 canBox--;
                 BoxUpdate();
+                MGSound.instance.playEff("Box");
             }
+            
+
         }
 
 
     }
     public void BoxUpdate(){
         boxText.text = $"{canBox}";
+        
     }
     private void Awake()
     {
-        audioSource = FindObjectOfType<AudioSource>();
         Init();
         
         
     }
+    private void Drop(){
+        if(this.gameObject.transform.position.y < deathY){
+            D();
+        }
+    }
     private void Update()
     {
+        Drop();
             GroundCheck();
             BoxCheck();
             BoxUpdate();
+        JumpCheck();
             
         /*
         if(Input.GetKeyDown(KeyCode.S))
@@ -154,6 +175,7 @@ public class PlayerScript : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D col){
         
         if(col.gameObject.CompareTag("BOX_ADD")){
+            MGSound.instance.playEff("AddBox");
             canBox += 3;
             BoxUpdate();
             col.gameObject.SetActive(false);

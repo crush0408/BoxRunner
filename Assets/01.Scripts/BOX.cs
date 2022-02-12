@@ -25,6 +25,7 @@ public class BOX : MonoBehaviour
     }
     IEnumerator Return(){
         yield return new WaitForSeconds(1f);
+        animator.SetTrigger("IsDestroy");
         PoolManager.instance.ReturnObject(this);
         Debug.Log("Return_" + this.gameObject.name);
         

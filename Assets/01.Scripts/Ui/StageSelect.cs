@@ -9,30 +9,29 @@ public class StageSelect : MonoBehaviour
 {
     public int index = 0;
     public Transform GoalPos;
-
+    public Text StageNum;
     public Transform StartPos;
     public Transform Player;
     public RectTransform[] Stages;
     public Image[] StagesIMG;
     Sequence Stage;
-
+    public Toggle toggle;
+    public GameObject cannotStage;
     void Start()
     {
-        for (int i = 0; i < Stages.Length; i++)
-        {
-            Stages[i].transform.localScale = new Vector3(0.75f, 0.75f, 0.75f);
-            if (i == 0)
-            {
-                Stages[i].transform.localScale = new Vector3(1, 1, 1);
-            }
-        }
+        
         StageStart();
-
+        toggle.isOn = DataManager.instance.isLeftHand;
     }
 
     // Update is called once per frame
     void Update()
     {
+        if (Input.GetKeyDown(KeyCode.T))
+        {
+            HeartManager.Instance.m_HeartAmount = 10;
+            HeartManager.Instance.m_RechargeRemainTime = 0;
+        }
         StageInfo();
         PlayerMove();
     }
@@ -48,10 +47,16 @@ public class StageSelect : MonoBehaviour
     public void nextStage() //버튼 기능 (오른쪽)
     {
         index += 1;
+        if (index >= 1)
+        {
+            index = 1;
+        }
+        /*
         if (index >= 3)
         {
             index = 3;
         }
+        */
         Debug.Log(index);
 
     }
@@ -75,67 +80,37 @@ public class StageSelect : MonoBehaviour
 
     public void StageInfo() //스테이지 선택시 스테이지창 효과
     {
+        float StageScore = 0;
+        if (DataManager.instance.key < index)
+        {
+            cannotStage.SetActive(true);
+        }
+        else
+        {
+            cannotStage.SetActive(false);
+        }
         if (index == 0)
         {
-            for (int i = 0; i <= 3; i++)
-            {
-                Stages[i].DOScale(new Vector3(0.75f, 0.75f, 0.75f), 1);
-                if (i == 0)
-                {
-                    Stages[0].DOScale(new Vector3(1, 1, 1), 0.4f);
-                }
-                // if (i == 4)
-                // {
-                //     Stages[4].DOScale(new Vector3(0, 0, 0), 0);
-                // }
-            } 
+            StageScore = 1;
+            StageNum.text = StageScore.ToString();
             
         }
         if (index == 1)
         {
+            StageScore = 2;
+            StageNum.text = StageScore.ToString();
 
-            for (int i = 0; i <= 3; i++)
-            {
-                Stages[i].DOScale(new Vector3(0.75f, 0.75f, 0.75f), 1);
-                if (i == 1)
-                {
-                    Stages[1].DOScale(new Vector3(1, 1, 1), 0.4f);
-                }
-                // if (i == 4)
-                // {
-                //     Stages[4].DOScale(new Vector3(0, 0, 0), 0);
-                // }
-            }
         }
         if (index == 2)
         {
-            for (int i = 0; i <= 3; i++)
-            {
-                Stages[i].DOScale(new Vector3(0.75f, 0.75f, 0.75f), 1);
-                if (i == 2)
-                {
-                    Stages[2].DOScale(new Vector3(1, 1, 1), 0.4f);
-                }
-                // if (i == 4)
-                // {
-                //     Stages[4].DOScale(new Vector3(0, 0, 0), 0);
-                // }
-            }
+            StageScore = 3;
+            StageNum.text = StageScore.ToString();
         }
         if (index == 3)
         {
-            for (int i = 0; i <= 3; i++)
-            {
-                Stages[i].DOScale(new Vector3(0.75f, 0.75f, 0.75f), 1);
-                if (i == 3)
-                {
-                    Stages[3].DOScale(new Vector3(1, 1, 1), 0.4f);
-                }
-                // if (i == 4)
-                // {
-                //     Stages[4].DOScale(new Vector3(0, 0, 0), 0);
-                // }
-            }
+            StageScore = 4;
+            StageNum.text = StageScore.ToString();
+
         }
         // if (index == 4)
         // {
@@ -173,10 +148,22 @@ public class StageSelect : MonoBehaviour
 
     public void TouchStage()
     {
-        if(index == 0){
-
-            SceneManager.LoadScene(index+2);
+       if(DataManager.instance.key >= index && HeartManager.Instance.m_HeartAmount > 0)
+        {
+            
             DataManager.instance.cur_index = index + 2;
+            HeartManager.Instance.OnClickUseHeart();
+
+            GameObject a = Instantiate(HeartManager.Instance.heartResumePanel);
+            a.transform.SetParent(this.gameObject.transform, false);
+            StartCoroutine(HeartPanel());
+            
+
+        }
+        else if(DataManager.instance.key >= index )
+        {
+            GameObject a = Instantiate(HeartManager.Instance.heartlowPanel);
+            a.transform.SetParent(this.gameObject.transform, false);
         }
 
     }
@@ -197,5 +184,16 @@ public class StageSelect : MonoBehaviour
         }
     }
     */
-
+    public void LeftHandMode()
+    {
+        DataManager.instance.isLeftHand = toggle.isOn;
+        //DataManager.instance.isLeftHand = !DataManager.instance.isLeftHand;
+        Debug.Log(DataManager.instance.isLeftHand);
+    }
+    IEnumerator HeartPanel()
+    {
+        Debug.Log("gd");
+        yield return new WaitForSeconds(1f);
+        SceneManager.LoadScene(index + 2);
+    }
 }

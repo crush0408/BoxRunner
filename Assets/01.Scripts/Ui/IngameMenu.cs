@@ -69,7 +69,19 @@ public class IngameMenu : MonoBehaviour
     }
     public void Retry()
     {
-        SceneManager.LoadScene(UnityEngine.SceneManagement.SceneManager.GetActiveScene().buildIndex);
+        if (HeartManager.Instance.m_HeartAmount > 0)
+        {
+            HeartManager.Instance.OnClickUseHeart();
+            GameObject a = Instantiate(HeartManager.Instance.heartResumePanel);
+            a.transform.SetParent(this.gameObject.transform, false);
+
+            StartCoroutine(HeartPanel());
+        }
+        else
+        {
+            GameObject a = Instantiate(HeartManager.Instance.heartlowPanel);
+            a.transform.SetParent(this.gameObject.transform, false);
+        }
         //Time.timeScale = 1f;
 
     }
@@ -84,5 +96,11 @@ public class IngameMenu : MonoBehaviour
         yield return new WaitForSeconds(1f);
         delayText.gameObject.SetActive(false);
         DataManager.instance.isPlaying = true;
+    }
+    IEnumerator HeartPanel()
+    {
+        Debug.Log("gd");
+        yield return new WaitForSeconds(1f);
+        SceneManager.LoadScene(UnityEngine.SceneManagement.SceneManager.GetActiveScene().buildIndex);
     }
 }
