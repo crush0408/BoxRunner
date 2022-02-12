@@ -22,7 +22,6 @@ public class DataManager : MonoBehaviour
 
     void Awake()
     {
-        MGSound.instance.init();
         if (instance == null)
         {
 
@@ -34,6 +33,7 @@ public class DataManager : MonoBehaviour
             Destroy(this.gameObject);
         }
         Load();
+        
         
     }
     void Start()
@@ -56,6 +56,8 @@ public class DataManager : MonoBehaviour
             PlayerPrefs.SetInt("BOXSKIN", 0);
         }
         boxSkinIndex = PlayerPrefs.GetInt("BOXSKIN");
+
+        MGSound.instance.AdjustVolume();
         /*
         int a = PlayerPrefs.GetInt("SetHeart"); 
         if(a == 0){
