@@ -45,8 +45,22 @@ public class LevelSelectUI : MonoBehaviour
         Volum.value = backVol;
         Effect.value = EffVol;
 
-        
-
+        if (backVol <= 0)
+        {
+            Main1.sprite = Main1Change;
+        }
+        else if (backVol >= 0.1f)
+        {
+            Main1.sprite = Main1Back;
+        }
+        if (EffVol <= 0)
+        {
+            Main2.sprite = Main2Change;
+        }
+        else if (EffVol >= 0.1f)
+        {
+            Main2.sprite = Main2Back;
+        }
         CurBoxSkin();
 
         MGSound.instance.playBgm("Select");
@@ -68,7 +82,7 @@ public class LevelSelectUI : MonoBehaviour
         {
             Main1.sprite = Main1Change;
         }
-        if (backVol >= 0.1f)
+        else if (backVol >= 0.1f)
         {
             Main1.sprite = Main1Back;
         }
@@ -83,7 +97,7 @@ public class LevelSelectUI : MonoBehaviour
         {
             Main2.sprite = Main2Change;
         }
-        if (EffVol >= 0.1f)
+        else if (EffVol >= 0.1f)
         {
             Main2.sprite = Main2Back;
         }
@@ -115,7 +129,7 @@ public class LevelSelectUI : MonoBehaviour
     }
     public void SkinSwap(){
 
-        DataManager.instance.boxSkinIndex = (DataManager.instance.boxSkinIndex + 1) % 2; // ¸Æ½º ½ºÅ² °ª À¸·Î ³ª´« ³ª¸ÓÁö
+        DataManager.instance.boxSkinIndex = (DataManager.instance.boxSkinIndex + 1) % 2; // ï¿½Æ½ï¿½ ï¿½ï¿½Å² ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
         PlayerPrefs.SetInt("BOXSKIN", DataManager.instance.boxSkinIndex);
         CurBoxSkin();
     }
