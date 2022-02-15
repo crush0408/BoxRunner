@@ -77,6 +77,8 @@ public class MGSound : MonoBehaviour
 
         for (int i = 0; i < audios.Length; i++)
             _audioClipDic.Add(audios[i].name, audios[i]);
+
+        
     }
     void OnEnable()
     {
@@ -110,6 +112,7 @@ public class MGSound : MonoBehaviour
             PlayerPrefEx.setInt("EffOn", Environments._effOn);
         }
         */
+        //AdjustVolume();
     }
 
     public void playBgm(string bgmName)
@@ -133,7 +136,7 @@ public class MGSound : MonoBehaviour
     }
     public void AdjustVolume()
     {
-        AudioListener.volume = DataManager.instance.BGMmasterSoundVolume;
+       _bgmSource[_bgmIdx].volume = DataManager.instance.BGMmasterSoundVolume;
     }
 
     public void playEff(string effName, float volume = 100f)
@@ -157,7 +160,7 @@ public class MGSound : MonoBehaviour
         _effSource[_effIdx].myName = effName;
         _effSource[_effIdx].mySource.clip = _audioClipDic[effName];
         _effSource[_effIdx].mySource.loop = false;
-        _effSource[_effIdx].mySource.volume = volume * DataManager.instance.EFFmasterSoundVolume;
+        _effSource[_effIdx].mySource.volume = DataManager.instance.EFFmasterSoundVolume;
         _effSource[_effIdx].mySource.Play();
         _effSource[_effIdx].bPlayed = true;
 
@@ -167,7 +170,7 @@ public class MGSound : MonoBehaviour
 
     IEnumerator crossBgm()
     {
-        float newVolumn = 0;
+        float newVolumn = 1-DataManager.instance.BGMmasterSoundVolume;
         int prevIdx = _bgmIdx - 1;
 
         if (prevIdx < 0)
@@ -183,7 +186,8 @@ public class MGSound : MonoBehaviour
                 _bgmSource[prevIdx].volume = (1 - newVolumn) / 2;
             }
 
-            _bgmSource[_bgmIdx].volume = newVolumn / 2;
+            //_bgmSource[_bgmIdx].volume = newVolumn / 2;
+            _bgmSource[_bgmIdx].volume = DataManager.instance.BGMmasterSoundVolume;
 
             yield return null;
         }
