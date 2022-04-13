@@ -6066,7 +6066,7 @@ GameObject:
   - component: {fileID: 679889682}
   - component: {fileID: 679889681}
   - component: {fileID: 679889680}
-  m_Layer: 5
+  m_Layer: 3
   m_Name: Canvas
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -8524,7 +8524,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 842902537}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: GroundCheck
   m_TagString: Untagged
   m_Icon: {fileID: -5397416234189338067, guid: 0000000000000000d000000000000000, type: 0}
@@ -8724,7 +8724,7 @@ GameObject:
   - component: {fileID: 864271042}
   - component: {fileID: 864271041}
   - component: {fileID: 864271046}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Player
   m_TagString: PLAYER
   m_Icon: {fileID: 0}
@@ -9470,7 +9470,7 @@ GameObject:
   - component: {fileID: 935861939}
   - component: {fileID: 935861940}
   - component: {fileID: 935861941}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: BoxCheck
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -9875,7 +9875,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 996370242}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: TextPos
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -12058,7 +12058,7 @@ GameObject:
   - component: {fileID: 1186693580}
   - component: {fileID: 1186693579}
   - component: {fileID: 1186693578}
-  m_Layer: 6
+  m_Layer: 8
   m_Name: TGround
   m_TagString: T
   m_Icon: {fileID: 0}
@@ -17342,7 +17342,7 @@ GameObject:
   - component: {fileID: 1549262871}
   - component: {fileID: 1549262873}
   - component: {fileID: 1549262872}
-  m_Layer: 5
+  m_Layer: 3
   m_Name: DelayText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -18423,7 +18423,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1658115640}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: JumpCheck
   m_TagString: Untagged
   m_Icon: {fileID: 0}

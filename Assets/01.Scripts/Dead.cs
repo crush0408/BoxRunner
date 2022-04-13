@@ -18,7 +18,7 @@ public class Dead : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D col){
         if(col.gameObject.CompareTag("PLAYER")){
             DataManager.instance.isPlaying = false;
-            player.D();
+            player.Dead();
         }
     }
 }

@@ -44,36 +44,22 @@ public class PlayerScript : MonoBehaviour
         jumpPower = 10f;
         gravityPower = 7f;
     }
-
-    
-        
-        
-   
-    
-    public void Jump(){
-        
-        //if(isGround){
-            rigid.velocity = Vector2.zero;
-            rigid.AddForce(Vector2.up * jumpPower * 150f);
-            isGround = false;
-            //Gravity();
-            Debug.Log("JUMP");
-        //}
-        
-    }
-    /*
-    private void Gravity()
+    private void Awake()
     {
-        rigid.AddForce(Vector2.down * gravityPower * 20);
-
+        Init();
     }
-    */
+    public void Jump()
+    {
+        rigid.velocity = Vector2.zero;
+        rigid.AddForce(Vector2.up * jumpPower * 150f);
+        isGround = false;
+    }
     private void GroundCheck()
     {
         if (rigid.velocity.y < 0)
         {
-            isGround = Physics2D.OverlapCircle(ground.position, 0.3f, whatIsGround); // 반지름이 0.2인 원에 ground가 닿으면 isGround를 true로 바꿔주는것
-
+            isGround = Physics2D.OverlapCircle(ground.position, 0.3f, whatIsGround); 
+            // 반지름이 0.2인 원에 ground가 닿으면 isGround를 true로 바꿔주는것
         }
     }
     private void BoxCheck()
@@ -81,11 +67,6 @@ public class PlayerScript : MonoBehaviour
         if (rigid.velocity.y < 0)
         {
             isBox = Physics2D.OverlapCircle(ground.position, 0.3f, whatIsBox);
-            /*
-            if(Physics2D.Raycast(transform.position,Vector2.down, 10f,out hit)){
-                
-            }
-            */
         }
     }
     private void JumpCheck()
@@ -121,55 +102,38 @@ public class PlayerScript : MonoBehaviour
                 BoxUpdate();
                 MGSound.instance.playEff("Box");
             }
-            
-
         }
-
-
     }
-    public void BoxUpdate(){
-        boxText.text = $"{canBox}";
-        
-    }
-    private void Awake()
+    public void BoxUpdate()
     {
-        Init();
-        
-        
+        boxText.text = $"{canBox}";
     }
-    private void Drop(){
-        if(this.gameObject.transform.position.y < deathY){
-            D();
+    private void Drop()
+    {
+        if(this.gameObject.transform.position.y < deathY)
+        {
+            Dead();
         }
+    }
+    public void Dead()
+    {
+        stageManager.GameResult(false);
+        SceneManager.LoadScene("ClearOver");
     }
     private void Update()
     {
         Drop();
-            GroundCheck();
-            BoxCheck();
-            BoxUpdate();
+        GroundCheck();
+        BoxCheck();
+        BoxUpdate();
         JumpCheck();
-            
-        /*
-        if(Input.GetKeyDown(KeyCode.S))
-            Jump();
-        */
     }
     private void OnCollisionEnter2D(Collision2D col){
-        if(col.gameObject.CompareTag("T")){
-            this.gameObject.GetComponent<BoxCollider2D>().isTrigger = true;
-        }
+        
         if(col.gameObject.CompareTag("SPIKE")){
             DataManager.instance.isPlaying = false;
             animator.SetTrigger("isHit");
             //플레이어 애니메이션 재생
-            
-            
-        }
-    }
-    private void OnTriggerExit2D(Collider2D col){
-        if(col.gameObject.CompareTag("T")){
-            this.gameObject.GetComponent<BoxCollider2D>().isTrigger = false;
         }
     }
     private void OnTriggerEnter2D(Collider2D col){
@@ -181,9 +145,5 @@ public class PlayerScript : MonoBehaviour
             col.gameObject.SetActive(false);
         }
         
-    }
-    public void D(){
-        stageManager.GameResult(false);
-        SceneManager.LoadScene("ClearOver");
     }
 }

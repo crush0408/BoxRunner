@@ -58,23 +58,9 @@ public class DataManager : MonoBehaviour
         boxSkinIndex = PlayerPrefs.GetInt("BOXSKIN");
 
         MGSound.instance.AdjustVolume();
-        /*
-        int a = PlayerPrefs.GetInt("SetHeart"); 
-        if(a == 0){
-            Debug.Log("SetHeart");
-            PlayerPrefs.SetInt("SetHeart", 1);
-            m_HeartAmount = MAX_HEART;
-            PlayerPrefs.Save();
-        }
-        else if(a != 0){
-            Debug.Log("Already set Heart");
-            m_HeartAmount = PlayerPrefs.GetInt("HeartAmount");
-            Debug.Log(m_HeartAmount);
-        }
-        */
+        
     }
 
-    // Update is called once per frame
     void Update()
     {
         if (Input.GetKeyDown(KeyCode.Q))
