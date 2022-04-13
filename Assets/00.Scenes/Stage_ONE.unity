@@ -8301,7 +8301,7 @@ GameObject:
   - component: {fileID: 834534075}
   - component: {fileID: 834534076}
   m_Layer: 0
-  m_Name: Map
+  m_Name: StageOne_MapData
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
