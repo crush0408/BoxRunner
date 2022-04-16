@@ -7,7 +7,6 @@ public class BOX : MonoBehaviour
     public Animator animator;
     Rigidbody2D rigid;
     
-    public static bool isb = true;
     void Start()
     {
         animator = GetComponent<Animator>();
