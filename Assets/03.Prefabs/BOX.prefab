@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: -4322996083504440061}
   - component: {fileID: 1088196804369117493}
   m_Layer: 7
-  m_Name: BOX
+  m_Name: Box
   m_TagString: BOX
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -98,6 +98,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 11e47094b57ba6548baabdbba5006f06, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  animator: {fileID: 0}
 --- !u!61 &5607085990534636697
 BoxCollider2D:
   m_ObjectHideFlags: 0

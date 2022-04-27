@@ -80,7 +80,7 @@ public class PlayerScript : MonoBehaviour
             if (!isBox)
             {
 
-                var boxObj = PoolManager.instance.GetObject();
+                var boxObj = PoolManager.Instance.Pop("Box");
                 boxObj.transform.position = new Vector3(this.transform.position.x + (this.gameObject.transform.localScale.x + 0.5f), this.transform.position.y + 0.5f, this.transform.position.z);
 
                 boxObj.transform.SetParent(map.transform);
@@ -91,7 +91,7 @@ public class PlayerScript : MonoBehaviour
             else
             {
 
-                var boxObj = PoolManager.instance.GetObject();
+                var boxObj = PoolManager.Instance.Pop("Box");
                 boxObj.transform.position = new Vector3(this.transform.position.x, this.transform.position.y + 0.5f, this.transform.position.z);
                 this.gameObject.transform.position = new Vector3(
                     this.transform.position.x, this.transform.position.y + 1f, this.transform.position.z

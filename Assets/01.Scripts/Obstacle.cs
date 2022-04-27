@@ -5,12 +5,10 @@ using UnityEngine.SceneManagement;
 
 public class Obstacle : MonoBehaviour
 {
-    public BOX box;
     PlayerScript player;
     StageManager stageManager;
     void OnEnable() 
     {
-        //box = FindObjectOfType<BOX>();
         player = FindObjectOfType<PlayerScript>();
         stageManager = FindObjectOfType<StageManager>();
     }
@@ -30,24 +28,5 @@ public class Obstacle : MonoBehaviour
             stageManager.GameResult(false);
             SceneManager.LoadScene("ClearOver");
         }
-        /*
-        if(box == null)
-        {
-            Debug.Log(box);
-            return;
-        }
-        */
-        /*
-        if (col.gameObject.CompareTag("BOX"))
-        {
-            Debug.Log("hi");
-            box = FindObjectOfType<BOX>();
-            box.animator.SetTrigger("BoxDestory");
-            
-            
-            PoolManager.instance.ReturnObject(col.gameObject.GetComponent<BOX>());
-        }
-        */
     }
-    
 }
