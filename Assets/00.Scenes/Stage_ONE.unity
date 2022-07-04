@@ -1487,6 +1487,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   prefabs:
   - {fileID: -1844120543331502028, guid: c8c1a2391727feb4594ba873eef34574, type: 3}
+  - {fileID: 8110551286242232011, guid: 34e34052c7823d54a907db5b85cedc21, type: 3}
 --- !u!1001 &228401781
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -8905,7 +8906,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   animator: {fileID: 0}
-  BoxCreat: {fileID: 8300000, guid: 95df7f59ea935954c8157359fa9c4a32, type: 3}
   map: {fileID: 834534074}
   isGround: 0
   isBox: 0

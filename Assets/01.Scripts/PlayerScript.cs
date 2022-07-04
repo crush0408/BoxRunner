@@ -7,7 +7,6 @@ using UnityEngine.SceneManagement;
 public class PlayerScript : MonoBehaviour
 {
     public Animator animator;
-    public AudioClip BoxCreat;
     public GameObject map;
     Rigidbody2D rigid;
     StageManager stageManager;
@@ -79,8 +78,16 @@ public class PlayerScript : MonoBehaviour
         {
             if (!isBox)
             {
+                PoolableMono boxObj;
+                if(DataManager.instance.boxSkinIndex == 0)
+                {
 
-                var boxObj = PoolManager.Instance.Pop("Box");
+                    boxObj = PoolManager.Instance.Pop("Box");
+                }
+                else
+                {
+                    boxObj = PoolManager.Instance.Pop("BOX_Christmas");
+                }
                 boxObj.transform.position = new Vector3(this.transform.position.x + (this.gameObject.transform.localScale.x + 0.5f), this.transform.position.y + 0.5f, this.transform.position.z);
 
                 boxObj.transform.SetParent(map.transform);
@@ -90,8 +97,16 @@ public class PlayerScript : MonoBehaviour
             }
             else
             {
+                PoolableMono boxObj;
+                if (DataManager.instance.boxSkinIndex == 0)
+                {
 
-                var boxObj = PoolManager.Instance.Pop("Box");
+                    boxObj = PoolManager.Instance.Pop("Box");
+                }
+                else
+                {
+                    boxObj = PoolManager.Instance.Pop("BOX_Christmas");
+                }
                 boxObj.transform.position = new Vector3(this.transform.position.x, this.transform.position.y + 0.5f, this.transform.position.z);
                 this.gameObject.transform.position = new Vector3(
                     this.transform.position.x, this.transform.position.y + 1f, this.transform.position.z

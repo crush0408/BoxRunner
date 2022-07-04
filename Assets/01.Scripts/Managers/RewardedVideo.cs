@@ -42,6 +42,7 @@ public class RewardedVideo : MonoBehaviour, IUnityAdsLoadListener, IUnityAdsShow
         {
             // Configure the button to call the ShowAd() method when clicked:
             _showAdButton.onClick.AddListener(ShowAd);
+            Debug.Log("adfs");
             // Enable the button for users to click:
             _showAdButton.interactable = true;
         }
